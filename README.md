@@ -24,13 +24,21 @@ In this challenge, create a web page that presents a styled list of Star Wars ch
 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
-- [ ] What is React JS and what problems does it try and solve? Support your answer with concepts introduced in class and from your personal research on the web.
+- [X] What is React JS and what problems does it try and solve? Support your answer with concepts introduced in class and from your personal research on the web.
 
-- [ ] What does it mean to _think_ in react?
+React is a JavaScript library that facilitates the development of declarative, component-based user interfaces. The declarative aspect is accomplished by its use of virtual DOM diffing to efficiently handle the updating/manipulating of the DOM, abstracting those implementation details away from the developer's point of view. The component aspect is based on ES6 modules which allow for structuring apps in small self-contained parts that can be composed together.
 
-- [ ] Describe state.
+- [X] What does it mean to _think_ in react?
 
-- [ ] Describe props.
+Thinking in React means thinking about how your app could be broken down into a hierarchical structure, by separating different pieces of UI into parts (and subparts) that can be written as separate components. It also means deciding what state needs to be tracked, and where it needs to be tracked.
+
+- [X] Describe state.
+
+State is data that can change during the use of an app. Anything that might be dynamically loaded, generated or modified by the user falls under the category of state.
+
+- [X] Describe props.
+
+Props are how React components communicate state between a parent component and (a) child component(s). Because of React's one-way data flow (AKA "single source of truth"), child components cannot directly update the state of their parent component. To accomplish state updates at the child level, functions can be passed down as props that will update the parent state.
 
 ## Project Set Up
 
