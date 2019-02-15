@@ -11,6 +11,13 @@ class App extends Component {
     }
   }
 
+  componentWillMount() {
+    console.log(window)
+    window.addEventListener("fetch", event => {
+      console.log("Handling fetch event for", event.request.url)
+    })
+  }
+
   componentDidMount() {
     this.getCharacters("https://swapi.co/api/people")
   }
