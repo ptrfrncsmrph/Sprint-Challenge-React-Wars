@@ -1,7 +1,7 @@
 import React from "react"
 import Character from "./Character"
 
-import "./CharacterList.css"
+import "./CharacterList.scss"
 
 const lastMatch = xs => xs[xs.length - 2]
 const uidFromUrl = url => lastMatch(url.split(/\//))
