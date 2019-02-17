@@ -1,42 +1,64 @@
 import React, { Component } from "react"
 import CharacterList from "./components/CharacterList"
+import ApolloClient from "apollo-boost"
+import gql from "graphql-tag"
+import { get, set } from "partial.lenses"
+import { compose } from "ramda"
 
 import "./App.css"
+
+const trace = msg => x => {
+  console.log(msg, x)
+  return x
+}
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      characters: []
+      people: []
     }
   }
 
   componentDidMount() {
-    this.getCharacters("https://swapi.co/api/people")
+    this.getDataFromGraphQL("http://localhost:50648/")
   }
 
-  getCharacters = URL => {
-    // feel free to research what this code is doing.
-    // At a high level we are calling an API to fetch some starwars data from the open web.
-    // We then take that data and resolve it our state.
-    fetch(URL)
-      .then(res => {
-        return res.json()
+  getDataFromGraphQL = uri => {
+    const client = new ApolloClient({
+      uri
+    })
+
+    client
+      .query({
+        query: gql`
+          {
+            allPeople {
+              people {
+                name
+                starshipConnection {
+                  starships {
+                    name
+                  }
+                }
+              }
+            }
+          }
+        `
       })
-      .then(data => {
-        this.setState({ characters: data.results })
-      })
-      .catch(err => {
-        throw new Error(err)
-      })
+      .then(
+        compose(
+          this.setState.bind(this),
+          get(["data", "allPeople"])
+        )
+      )
   }
 
   render() {
-    console.log(this.state.starwarsChars)
     return (
       <div className="App">
         <h1 className="Header">React Wars</h1>
-        <CharacterList characters={this.state.characters} />
+        <CharacterList characters={this.state.people} />
       </div>
     )
   }

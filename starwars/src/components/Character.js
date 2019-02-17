@@ -1,19 +1,19 @@
 import React from "react"
 import "./Character.css"
 
-const Character = ({ name, height, mass, created, edited }) => (
-  <li className="character">
+import formatDistance from "date-fns/formatDistance"
+
+const Character = ({ name, starshipConnection: { starships } }) => (
+  <li
+    className="character"
+    style={{ display: starships.length ? "inherit" : "none" }}
+  >
     <h2>{name}</h2>
-    <dl>
-      <dt>Height</dt>
-      <dd>{height}</dd>
-      <dt>Mass</dt>
-      <dd>{mass}</dd>
-      <dt>Created</dt>
-      <dd>{created && new Date(created).toDateString()}</dd>
-      <dt>Edited</dt>
-      <dd>{edited && new Date(edited).toDateString()}</dd>
-    </dl>
+    <ul>
+      {starships.map(({ name }) => (
+        <li>{name}</li>
+      ))}
+    </ul>
   </li>
 )
 

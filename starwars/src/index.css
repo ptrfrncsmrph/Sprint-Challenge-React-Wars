@@ -6,4 +6,5 @@ body {
   background-image: url('./sw-bg.jpg');
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: 50%;
 }
